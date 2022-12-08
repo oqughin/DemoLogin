@@ -1,11 +1,11 @@
-import { createStore, Store } from 'vuex'
+import { createStore} from 'vuex'
+import { login,getInfo } from '../api/manager'
 import { useCookies } from '@vueuse/integrations/useCookies'
-import { login } from '../api/manager'
 
 const cookie = useCookies()
 
 //创建store实例
-export const store = createStore({
+ const store = createStore({
     state(){
         return {
             //用户信息
@@ -27,6 +27,17 @@ export const store = createStore({
                     resolve(res)
                 })
             })
-        }
+        },
+        getinfo({commit}){
+            return new Promise((resolve,reject)=>{
+                getInfo()
+                .then((res)=>{
+                    this.commit("SET_USER",res.data.data)
+                    resolve(res)
+                })
+            })
+        },
     }
 })
+
+export default store

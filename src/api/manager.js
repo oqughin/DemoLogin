@@ -7,3 +7,13 @@ export function login(username,password){
         password
     })
 }
+
+//获取用户信息及菜单列表
+export function getInfo(){
+    return axios.post("/getinfo")
+}
+
+//用户退出登陆
+export function logOut(){
+    return axios.post("/logout")
+}
